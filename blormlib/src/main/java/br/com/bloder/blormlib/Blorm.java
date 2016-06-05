@@ -19,11 +19,9 @@ public class Blorm {
 
     private List<Validate> validations;
     private View field;
-    private Context context;
 
-    public Builder(Context context) {
+    public Builder() {
       validations = new ArrayList<>();
-      this.context = context;
     }
 
     public Builder field(View field) {
@@ -43,24 +41,20 @@ public class Blorm {
     }
 
     public void onSubmit(View submittedItem) {
-      new Blorm(this.validations, this.context).onSubmitted();
+      new Blorm(this.validations).onSubmitted();
     }
   }
 
   private List<Validate> validations;
-  private Context context;
-
-  public Blorm(List<Validate> validations, Context context) {
+  
+  public Blorm(List<Validate> validations) {
     this.validations = validations;
-    this.context = context;
   }
 
   private void onSubmitted() {
     for(Validate validate : validations) {
       if(validate.validate()) {
-
       } else {
-        Toast.makeText(context, "Erro", Toast.LENGTH_SHORT).show();
       }
     }
   }

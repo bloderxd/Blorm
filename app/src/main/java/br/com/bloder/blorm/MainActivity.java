@@ -6,7 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import br.com.bloder.blormlib.Blorm;
-import br.com.bloder.blormlib.validation.Validations;
+
+import static br.com.bloder.blormlib.validation.Validations.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,6 @@ public class MainActivity extends AppCompatActivity {
     editTextFilled = (EditText) findViewById(R.id.edit_text_filled);
     submit = (Button) findViewById(R.id.submit);
 
-    new Blorm.Builder(this).field(editTextFilled).is(Validations.filled).onSubmit(submit);
+    new Blorm.Builder().field(editTextFilled).is(filled).onSubmit(submit);
   }
 }
