@@ -1,1 +1,1 @@
-include ':app', ':blorm-lib'
+include ':app', ':blorm-lib', ':blormlib'
