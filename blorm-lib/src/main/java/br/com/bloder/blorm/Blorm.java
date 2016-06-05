@@ -6,6 +6,6 @@ package br.com.bloder.blorm;
 public class Blorm {
 
   public static class Builder {
-    
+
   }
 }
