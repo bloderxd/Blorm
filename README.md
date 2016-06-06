@@ -12,7 +12,7 @@
 
 With blorm you can do validations in a most beautiful way. Example:
  ```java
-    Blorm.Builder().field(editText).is(Validations.filled).onSubmit(button); 
+Blorm.Builder().field(editText).is(Validations.filled).onSubmit(button); 
  ```
 And you can make it more beautiful! using static import in Validations class you can turn your validation in a phrase,
 like:
