@@ -1,8 +1,6 @@
 package br.com.bloder.blormlib;
 
-import android.content.Context;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +38,13 @@ public class Blorm {
       return this;
     }
 
+    public Builder is(String errorMessgae, Validation validation) {
+      validation.field = this.field;
+      validation.errorMessage = errorMessgae;
+      this.validations.add(validation.validate());
+      return this;
+    }
+
     public void onSubmit(View submittedItem) {
       new Blorm(this.validations).onSubmitted();
     }
@@ -53,8 +58,8 @@ public class Blorm {
 
   private void onSubmitted() {
     for(Validate validate : validations) {
-      if(validate.validate()) {
-      } else {
+      if(!validate.validate()) {
+        validate.onError();
       }
     }
   }
