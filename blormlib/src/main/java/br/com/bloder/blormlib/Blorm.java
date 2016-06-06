@@ -46,7 +46,12 @@ public class Blorm {
     }
 
     public void onSubmit(View submittedItem) {
-      new Blorm(this.validations).onSubmitted();
+      submittedItem.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          new Blorm(validations).onSubmitted();
+        }
+      });
     }
   }
 
