@@ -11,25 +11,48 @@
 # How does it work?
 
 With blorm you can do validations in a most beautiful way. Example:
-
+ ```java
     Blorm.Builder().field(editText).is(Validations.filled).onSubmit(button); 
-
+ ```
 And you can make it more beautiful! using static import in Validations class you can turn your validation in a phrase,
 like:
-
-    import static br.com.bloder.blormlib.validation.Validations.*;
-    
-    Blorm.Builder().field(editText).is(filled).onSubmit(button);
-
+```java
+ import static br.com.bloder.blormlib.validation.Validations.*;
+ 
+ Blorm.Builder().field(editText).is(filled).onSubmit(button);
+```
 "Field is filled on submit" Beautiful! :heart::heart::heart::heart:
 
 You can also make your own validations.
+```java
+new Blorm.Builder().field(editText).is(new Validate() {
+  @Override
+  public boolean validate() {
+    return false;
+  }
+ }).onSubmit(button);
+```
 
-    new Blorm.Builder().field(editText).is(new Validate() {
+# Error Messages
+
+Blorm also supports custom error messages, EditText error message example:
+
+```java
+new Blorm.Builder().field(editTextFilled).is("Your Error Message", filled).onSubmit(submit);
+```
+Or you can also make your error case custom.
+
+```java
+new Blorm.Builder().field(editTextFilled).is(new Validate() {
       @Override
       public boolean validate() {
         return false;
       }
-    }).onSubmit(button);
-  
+
+      @Override
+      public void onError() {
+
+      }
+    }).onSubmit(submit);
+```
 
