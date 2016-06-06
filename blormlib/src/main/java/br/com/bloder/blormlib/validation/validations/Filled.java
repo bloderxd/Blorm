@@ -20,6 +20,11 @@ public class Filled extends Validation {
         editText = (EditText) field;
         return !String.valueOf(editText.getText()).trim().isEmpty();
       }
+
+      @Override
+      public void onError() {
+        editText.setError(errorMessage != null && !errorMessage.isEmpty() ? errorMessage : "This field can't be blank");
+      }
     };
   }
 }
