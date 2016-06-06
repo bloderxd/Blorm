@@ -6,4 +6,5 @@ package br.com.bloder.blormlib.validation;
 public interface Validate {
 
   boolean validate();
+  void onError();
 }
