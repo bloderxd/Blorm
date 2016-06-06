@@ -8,7 +8,8 @@ import android.view.View;
 public abstract class Validation {
 
   public View field;
-
+  public String errorMessage;
+  
   public Validate validate() {
     return null;
   }
