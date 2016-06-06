@@ -22,5 +22,14 @@ like:
     Blorm.Builder().field(editText).is(filled).onSubmit(button);
 
 "Field is filled on submit" Beautiful! :heart::heart::heart::heart:
+
+You can also make your own validations.
+
+    new Blorm.Builder().field(editText).is(new Validate() {
+      @Override
+      public boolean validate() {
+        return false;
+      }
+    }).onSubmit(button);
   
 
