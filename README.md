@@ -12,14 +12,14 @@
 
 With blorm you can do validations in a most beautiful way. Example:
  ```java
-Blorm.Builder().field(editText).is(Validations.filled).submitOn(button); 
+new Blorm.Builder().field(editText).is(Validations.filled).submitOn(button); 
  ```
 And you can make it more beautiful! using static import in Validations class you can turn your validation in a phrase,
 like:
 ```java
  import static br.com.bloder.blormlib.validation.Validations.*;
  
- Blorm.Builder().field(editText).is(filled).submitOn(button);
+new Blorm.Builder().field(editText).is(filled).submitOn(button);
 ```
 "Field is filled on submit" Beautiful! :heart::heart::heart::heart:
 
@@ -73,3 +73,22 @@ You can also define what program will do if all validations has passed:
 
 In this example Blorm verify if an editText is filled and is a cpf and show a toast if all those validations pass.
 
+# Error case
+
+With Blorm you can set individually error cases in each validation and you can make a general error case:
+
+```java
+new Blorm.Builder()
+              .field(editTextFilled)
+              .is(filled)
+              .is(cpf)
+              .onError(new Action() {
+                @Override
+                public void call() {
+                  Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                }
+              })
+              .submitOn(submit);
+```
+
+In this example, if one of these validations failed, it will appears that error toast. 
