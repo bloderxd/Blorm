@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import br.com.bloder.blormlib.Blorm;
 import br.com.bloder.blormlib.validation.Action;
-import br.com.bloder.blormlib.validation.Validate;
 
 import static br.com.bloder.blormlib.validation.Validations.*;
 
@@ -27,12 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
     editTextFilled.setText("Hello");
 
-        new Blorm.Builder().field(editTextFilled).is(filled).onSuccess(new Action() {
+      new Blorm.Builder()
+              .field(editTextFilled).is(filled)
+              .onSuccess(new Action() {
           @Override
-          public void call() {
-            onSuccess();
-          }}
-        ).onSubmit(submit);
+          public void call() { onSuccess();
+          }})
+              .submitOn(submit);
   }
 
   private void onSuccess() {

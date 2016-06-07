@@ -52,7 +52,7 @@ public class Blorm {
       return this;
     }
 
-    public void onSubmit(View submittedItem) {
+    public void submitOn(View submittedItem) {
       submittedItem.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
