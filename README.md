@@ -25,7 +25,7 @@ new Blorm.Builder().field(editText).is(filled).submitOn(button);
 
 You can also make your own validations.
 ```java
-new Blorm.Builder().field(editText).is(new Validate() {
+new Blorm.Builder().validate(new Validate() {
   @Override
   public boolean validate() {
     return false;
@@ -43,7 +43,7 @@ new Blorm.Builder().field(editTextFilled).is("Your Error Message", filled).submi
 Or you can also make your error case custom.
 
 ```java
-new Blorm.Builder().field(editTextFilled).is(new Validate() {
+new Blorm.Builder().validate(new Validate() {
       @Override
       public boolean validate() {
         return false;
