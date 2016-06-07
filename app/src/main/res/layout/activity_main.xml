@@ -10,6 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <CheckBox
+        android:id="@+id/check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
