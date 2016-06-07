@@ -32,11 +32,21 @@ public class MainActivity extends AppCompatActivity {
           @Override
           public void call() { onSuccess();
           }})
+              .onError(new Action() {
+                @Override
+                public void call() {
+                  onError();
+                }
+              })
               .submitOn(submit);
   }
 
   private void onSuccess() {
     editTextFilled.setError(null);
     Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+  }
+
+  private void onError() {
+    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
   }
 }
