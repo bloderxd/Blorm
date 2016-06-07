@@ -19,6 +19,7 @@ public class Blorm {
     private List<Validate> validations;
     private View field;
     private Action onSuccess;
+    private Action onError;
 
     public Builder() {
       validations = new ArrayList<>();
@@ -26,6 +27,11 @@ public class Blorm {
 
     public Builder onSuccess(Action action) {
       this.onSuccess = action;
+      return this;
+    }
+
+    public Builder onError(Action action) {
+      this.onError = action;
       return this;
     }
 
@@ -56,7 +62,7 @@ public class Blorm {
       submittedItem.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          new Blorm(validations, onSuccess).onSubmitted();
+          new Blorm(validations, onSuccess, onError).onSubmitted();
         }
       });
     }
@@ -64,11 +70,13 @@ public class Blorm {
 
   private List<Validate> validations;
   private Action onSuccess;
+  private Action onError;
   private Boolean allValidationsPassed = true;
   
-  public Blorm(List<Validate> validations, Action onSuccess) {
+  public Blorm(List<Validate> validations, Action onSuccess, Action onError) {
     this.validations = validations;
     this.onSuccess = onSuccess;
+    this.onError = onError;
   }
 
   private void onSubmitted() {
@@ -78,8 +86,10 @@ public class Blorm {
         validate.onError();
       }
     }
-    if(allValidationsPassed) {
+    if(allValidationsPassed && onSuccess != null) {
       this.onSuccess.call();
+    } else if(!allValidationsPassed && onError != null) {
+      this.onError.call();
     }
   }
 }
