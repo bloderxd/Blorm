@@ -12,14 +12,14 @@
 
 With blorm you can do validations in a most beautiful way. Example:
  ```java
-Blorm.Builder().field(editText).is(Validations.filled).onSubmit(button); 
+Blorm.Builder().field(editText).is(Validations.filled).submitOn(button); 
  ```
 And you can make it more beautiful! using static import in Validations class you can turn your validation in a phrase,
 like:
 ```java
  import static br.com.bloder.blormlib.validation.Validations.*;
  
- Blorm.Builder().field(editText).is(filled).onSubmit(button);
+ Blorm.Builder().field(editText).is(filled).submitOn(button);
 ```
 "Field is filled on submit" Beautiful! :heart::heart::heart::heart:
 
@@ -30,7 +30,7 @@ new Blorm.Builder().field(editText).is(new Validate() {
   public boolean validate() {
     return false;
   }
- }).onSubmit(button);
+ }).submitOn(button);
 ```
 
 # Error Messages
@@ -38,7 +38,7 @@ new Blorm.Builder().field(editText).is(new Validate() {
 Blorm also supports custom error messages, EditText error message example:
 
 ```java
-new Blorm.Builder().field(editTextFilled).is("Your Error Message", filled).onSubmit(submit);
+new Blorm.Builder().field(editTextFilled).is("Your Error Message", filled).submitOn(submit);
 ```
 Or you can also make your error case custom.
 
@@ -53,7 +53,7 @@ new Blorm.Builder().field(editTextFilled).is(new Validate() {
       public void onError() {
 
       }
-    }).onSubmit(submit);
+    }).submitOn(submit);
 ```
 
 # Success case
@@ -68,7 +68,7 @@ You can also define what program will do if all validations has passed:
                              public void call() {
                                   Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
                              }}
-        ).onSubmit(submit);
+        ).submitOn(submit);
 ```
 
 In this example Blorm verify if an editText is filled and is a cpf and show a toast if all those validations pass.
