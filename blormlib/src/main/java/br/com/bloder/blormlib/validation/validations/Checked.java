@@ -14,6 +14,7 @@ public class Checked extends Validation {
         return new Validate() {
             @Override
             public boolean validate() {
+               checkBox = (CheckBox) field;
                return checkBox.isChecked();
             }
 
