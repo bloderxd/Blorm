@@ -5,6 +5,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.bloder.blormlib.validation.Action;
 import br.com.bloder.blormlib.validation.Validate;
 import br.com.bloder.blormlib.validation.Validation;
 
@@ -17,9 +18,15 @@ public class Blorm {
 
     private List<Validate> validations;
     private View field;
+    private Action onSuccess;
 
     public Builder() {
       validations = new ArrayList<>();
+    }
+
+    public Builder onSuccess(Action action) {
+      this.onSuccess = action;
+      return this;
     }
 
     public Builder field(View field) {
@@ -49,23 +56,30 @@ public class Blorm {
       submittedItem.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          new Blorm(validations).onSubmitted();
+          new Blorm(validations, onSuccess).onSubmitted();
         }
       });
     }
   }
 
   private List<Validate> validations;
+  private Action onSuccess;
+  private Boolean allValidationsPassed = true;
   
-  public Blorm(List<Validate> validations) {
+  public Blorm(List<Validate> validations, Action onSuccess) {
     this.validations = validations;
+    this.onSuccess = onSuccess;
   }
 
   private void onSubmitted() {
     for(Validate validate : validations) {
       if(!validate.validate()) {
+        allValidationsPassed = false;
         validate.onError();
       }
+    }
+    if(allValidationsPassed) {
+      this.onSuccess.call();
     }
   }
 }
