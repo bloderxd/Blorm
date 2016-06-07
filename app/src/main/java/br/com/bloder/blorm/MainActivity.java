@@ -3,6 +3,7 @@ package br.com.bloder.blorm;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
   private EditText editTextFilled;
   private Button submit;
+  private CheckBox checkBox;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +25,19 @@ public class MainActivity extends AppCompatActivity {
 
     editTextFilled = (EditText) findViewById(R.id.edit_text_filled);
     submit = (Button) findViewById(R.id.submit);
+    checkBox = (CheckBox) findViewById(R.id.check_box);
 
     editTextFilled.setText("Hello");
 
       new Blorm.Builder()
               .field(editTextFilled).is(filled)
+              .field(checkBox).is(checked)
               .onSuccess(new Action() {
-          @Override
-          public void call() { onSuccess();
-          }})
+                  @Override
+                  public void call() {
+                      onSuccess();
+                  }
+              })
               .onError(new Action() {
                 @Override
                 public void call() {
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void onSuccess() {
     editTextFilled.setError(null);
+    checkBox.setError(null);
     Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
   }
 
