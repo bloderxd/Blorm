@@ -40,7 +40,7 @@ public class Blorm {
       return this;
     }
 
-    public Builder is(Validate validation) {
+    public Builder validate(Validate validation) {
       this.validations.add(validation);
       return this;
     }
