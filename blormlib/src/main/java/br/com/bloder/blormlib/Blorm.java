@@ -81,7 +81,9 @@ public class Blorm {
 
   private void onSubmitted() {
     for(Validate validate : validations) {
-      if(!validate.validate()) {
+      if(validate.validate()) {
+        validate.onSuccess();
+      } else {
         allValidationsPassed = false;
         validate.onError();
       }
