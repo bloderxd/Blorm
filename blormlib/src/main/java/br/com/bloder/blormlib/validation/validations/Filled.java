@@ -25,6 +25,8 @@ public class Filled extends Validation {
       public void onError() {
         editText.setError(errorMessage != null && !errorMessage.isEmpty() ? errorMessage : "This field can't be blank");
       }
+
+      @Override public void onSuccess() {}
     };
   }
 }

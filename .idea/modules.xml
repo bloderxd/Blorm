@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Blorm.iml" filepath="$PROJECT_DIR$/Blorm.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/blorm-lib/blorm-lib.iml" filepath="$PROJECT_DIR$/blorm-lib/blorm-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/blorm-lib/blorm-lib.iml" filepath="$PROJECT_DIR$/blorm-lib/blorm-lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/blormlib/blormlib.iml" filepath="$PROJECT_DIR$/blormlib/blormlib.iml" />
     </modules>
   </component>

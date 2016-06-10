@@ -22,6 +22,8 @@ public class Checked extends Validation {
             public void onError() {
                 checkBox.setError("This field can't be unchecked");
             }
+
+            @Override public void onSuccess() {}
         };
     }
 }
