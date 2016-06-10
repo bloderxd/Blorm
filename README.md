@@ -53,6 +53,11 @@ new Blorm.Builder().validate(new Validate() {
       public void onError() {
 
       }
+      
+      @Override
+      public void onSuccess() {
+          
+      }
     }).submitOn(submit);
 ```
 
@@ -72,6 +77,19 @@ You can also define what program will do if all validations has passed:
 ```
 
 In this example Blorm verify if an editText is filled and is a cpf and show a toast if all those validations pass.
+<br><br>
+Or you can implement a specific success case in each validation like this:
+
+```java
+new Blorm.Builder().field(editTextFilled).validate(new Validate() {
+        @Override
+        public void onSuccess() {
+          Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+        }
+        @Override public boolean validate() { return false; }
+        @Override public void onError() {}
+      });
+```
 
 # Error case
 
