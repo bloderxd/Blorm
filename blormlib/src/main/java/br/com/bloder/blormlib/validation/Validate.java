@@ -7,4 +7,5 @@ public interface Validate {
 
   boolean validate();
   void onError();
+  void onSuccess();
 }
