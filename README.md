@@ -111,6 +111,16 @@ new Blorm.Builder()
 
 In this example, if one of these validations failed, it will appears that error toast. 
 
+# Import lib
+
+Into your gradle dependencies:
+
+```
+dependencies {
+    compile 'com.github.bloder:blormlib:1.0'
+}
+```
+
 # License
 
 ```
