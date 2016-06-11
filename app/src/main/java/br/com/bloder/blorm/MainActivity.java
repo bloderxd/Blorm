@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import br.com.bloder.blormlib.Blorm;
 import br.com.bloder.blormlib.validation.Action;
+import br.com.bloder.blormlib.validation.Validate;
+import br.com.bloder.blormlib.validation.Validation;
 
 import static br.com.bloder.blormlib.validation.Validations.*;
 
@@ -45,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
                 }
               })
               .submitOn(submit);
+
+      new Blorm.Builder().field(editTextFilled).validate(new Validate() {
+        @Override
+        public void onSuccess() {
+          Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+        }
+        @Override public boolean validate() { return false; }
+        @Override public void onError() {}
+      });
   }
 
   private void onSuccess() {
