@@ -115,7 +115,7 @@ In this example, if one of these validations failed, it will appears that error 
 
 put in your gradle dependencies:
 
-```
+```groovy
 dependencies {
     compile 'com.github.bloder:blormlib:1.0'
 }
