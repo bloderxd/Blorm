@@ -23,6 +23,17 @@ new Blorm.Builder().field(editText).is(filled).submitOn(button);
 ```
 "Field is filled on submit" Beautiful! :heart::heart::heart::heart:
 
+Or like this:
+
+```java
+ import static br.com.bloder.blormlib.validation.Validations.*;
+ 
+new Blorm.Builder().field(editText).is(filled).and(cpf)
+                   .andField(checkBox).is(checked)
+                   .submitOn(button);
+```
+"field editText is filled and cpf and field checkBox is checked" Yeah... I love it :heart:
+
 You can also make your own validations.
 ```java
 new Blorm.Builder().validate(new Validate() {
@@ -67,7 +78,7 @@ You can also define what program will do if all validations has passed:
 
 ```java
  new Blorm.Builder().field(editTextFilled).is(filled)
-                    .field(editTextFilled).is(cpf)
+                    .andField(editTextFilled).is(cpf)
                     .onSuccess(new Action() {
                              @Override
                              public void call() {
@@ -81,7 +92,7 @@ In this example Blorm verify if an editText is filled and is a cpf and show a to
 Or you can implement a specific success case in each validation like this:
 
 ```java
-new Blorm.Builder().field(editTextFilled).validate(new Validate() {
+new Blorm.Builder().validate(new Validate() {
         @Override
         public void onSuccess() {
           Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
@@ -99,7 +110,7 @@ With Blorm you can set individually error cases in each validation and you can m
 new Blorm.Builder()
               .field(editTextFilled)
               .is(filled)
-              .is(cpf)
+              .and(cpf)
               .onError(new Action() {
                 @Override
                 public void call() {
