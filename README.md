@@ -113,12 +113,29 @@ In this example, if one of these validations failed, it will appears that error 
 
 # Import Blorm
 
-put in your gradle dependencies:
+## Gradle
 
 ```groovy
 dependencies {
     compile 'com.github.bloder:blormlib:1.0'
 }
+```
+
+## Maven
+```xml
+<dependency>
+  <groupId>com.github.bloder</groupId>
+  <artifactId>blormlib</artifactId>
+  <version>1.0</version>
+  <type>pom</type>
+</dependency>
+```
+##Ivy
+
+```xml
+<dependency org='com.github.bloder' name='blormlib' rev='1.0'>
+  <artifact name='$AID' ext='pom'></artifact>
+</dependency>
 ```
 
 # License
