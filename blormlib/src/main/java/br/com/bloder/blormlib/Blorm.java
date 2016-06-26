@@ -25,14 +25,11 @@ public class Blorm {
       validations = new ArrayList<>();
     }
 
-    public Builder onSuccess(Action action) {
-      this.onSuccess = action;
-      return this;
-    }
-
-    public Builder onError(Action action) {
-      this.onError = action;
-      return this;
+    public Builder(List<Validate> validations, View field, Action onSuccess, Action onError) {
+      this.validations = validations;
+      this.field = field;
+      this.onSuccess = onSuccess;
+      this.onError = onError;
     }
 
     public Builder field(View field) {
@@ -40,21 +37,68 @@ public class Blorm {
       return this;
     }
 
-    public Builder validate(Validate validation) {
+    public Builder is(Validate validation) {
       this.validations.add(validation);
       return this;
     }
 
-    public Builder is(Validation validation) {
+    public PhraseSequenceBuilder is(Validation validation) {
+      validation.field = this.field;
+      this.validations.add(validation.validate());
+      return new PhraseSequenceBuilder(this.validations, this.field, this.onSuccess, this.onError);
+    }
+
+    public PhraseSequenceBuilder is(String errorMessage, Validation validation) {
+      validation.field = this.field;
+      validation.errorMessage = errorMessage;
+      this.validations.add(validation.validate());
+      return new PhraseSequenceBuilder(this.validations, this.field, this.onSuccess, this.onError);
+    }
+  }
+
+  public static class PhraseSequenceBuilder {
+
+    private List<Validate> validations;
+    private View field;
+    private Action onSuccess;
+    private Action onError;
+
+    public PhraseSequenceBuilder(List<Validate> validations, View field, Action onSuccess, Action onError) {
+      this.validations = validations;
+      this.field = field;
+      this.onSuccess = onSuccess;
+      this.onError = onError;
+    }
+
+    public PhraseSequenceBuilder and(Validation validation) {
       validation.field = this.field;
       this.validations.add(validation.validate());
       return this;
     }
 
-    public Builder is(String errorMessgae, Validation validation) {
+    public PhraseSequenceBuilder and(String errorMessage, Validation validation) {
       validation.field = this.field;
-      validation.errorMessage = errorMessgae;
+      validation.errorMessage = errorMessage;
       this.validations.add(validation.validate());
+      return this;
+    }
+
+    public PhraseSequenceBuilder and(Validate validate) {
+      this.validations.add(validate);
+      return this;
+    }
+
+    public Builder andField(View field) {
+      return new Builder(this.validations, field, this.onSuccess, this.onError);
+    }
+
+    public PhraseSequenceBuilder onSuccess(Action action) {
+      this.onSuccess = action;
+      return this;
+    }
+
+    public PhraseSequenceBuilder onError(Action action) {
+      this.onError = action;
       return this;
     }
 
