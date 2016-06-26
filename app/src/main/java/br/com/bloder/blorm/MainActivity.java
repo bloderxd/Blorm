@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
       new Blorm.Builder()
               .field(editTextFilled).is(filled)
-              .field(checkBox).is(checked)
+              .andField(checkBox).is(checked)
               .onSuccess(new Action() {
                   @Override
                   public void call() {
@@ -47,15 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 }
               })
               .submitOn(submit);
-
-      new Blorm.Builder().field(editTextFilled).validate(new Validate() {
-        @Override
-        public void onSuccess() {
-          Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
-        }
-        @Override public boolean validate() { return false; }
-        @Override public void onError() {}
-      });
   }
 
   private void onSuccess() {
