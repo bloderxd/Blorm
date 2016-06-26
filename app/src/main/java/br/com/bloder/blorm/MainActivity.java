@@ -10,6 +10,7 @@ import android.widget.Toast;
 import br.com.bloder.blormlib.Blorm;
 import br.com.bloder.blormlib.validation.Action;
 import br.com.bloder.blormlib.validation.Validate;
+import br.com.bloder.blormlib.validation.Validation;
 
 import static br.com.bloder.blormlib.validation.Validations.*;
 
@@ -31,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     editTextFilled.setText("Hello");
 
       new Blorm.Builder()
-              .field(editTextFilled).is(filled).and(filled)
-              .andField(checkBox).is(checked)
+              .field(editTextFilled).is(filled)
+              .field(checkBox).is(checked)
               .onSuccess(new Action() {
                   @Override
                   public void call() {
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
               })
               .submitOn(submit);
 
-      new Blorm.Builder().field(editTextFilled).is(new Validate() {
+      new Blorm.Builder().field(editTextFilled).validate(new Validate() {
         @Override
         public void onSuccess() {
           Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
