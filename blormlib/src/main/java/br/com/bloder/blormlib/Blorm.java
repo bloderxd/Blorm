@@ -92,7 +92,7 @@ public class Blorm {
       return this;
     }
 
-    public PhraseSequenceBuilder and(Validate validate) {
+    public PhraseSequenceBuilder validate(Validate validate) {
       this.validates.add(validate);
       return this;
     }
