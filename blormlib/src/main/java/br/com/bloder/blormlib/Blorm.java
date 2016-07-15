@@ -16,80 +16,90 @@ public class Blorm {
 
   public static class Builder {
 
-    private List<Validate> validations;
-    private View field;
+    private List<Validation> validations;
+    private List<View> field;
+    private List<String> errorMessages;
+    private List<Validate> validates;
     private Action onSuccess;
     private Action onError;
 
     public Builder() {
-      validations = new ArrayList<>();
+      this.validates = new ArrayList<>();
+      this.errorMessages = new ArrayList<>();
+      this.validations = new ArrayList<>();
+      this.field = new ArrayList<>();
     }
 
-    public Builder(List<Validate> validations, View field, Action onSuccess, Action onError) {
+    public Builder(List<Validation> validations, List<View> field, List<String> errorMessages, List<Validate> validates, Action onSuccess, Action onError) {
       this.validations = validations;
       this.field = field;
+      this.errorMessages = errorMessages;
+      this.validates = validates;
       this.onSuccess = onSuccess;
       this.onError = onError;
     }
 
     public Builder field(View field) {
-      this.field = field;
+      this.field.add(field);
       return this;
     }
 
-    public Builder is(Validate validation) {
-      this.validations.add(validation);
+    public Builder validate(Validate validation) {
+      this.validates.add(validation);
       return this;
     }
 
     public PhraseSequenceBuilder is(Validation validation) {
-      validation.field = this.field;
-      this.validations.add(validation.validate());
-      return new PhraseSequenceBuilder(this.validations, this.field, this.onSuccess, this.onError);
+      this.errorMessages.add(null);
+      this.validations.add(validation);
+      return new PhraseSequenceBuilder(this.validations, this.field, this.errorMessages, this.validates, this.onSuccess, this.onError);
     }
 
     public PhraseSequenceBuilder is(String errorMessage, Validation validation) {
-      validation.field = this.field;
-      validation.errorMessage = errorMessage;
-      this.validations.add(validation.validate());
-      return new PhraseSequenceBuilder(this.validations, this.field, this.onSuccess, this.onError);
+      this.errorMessages.add(errorMessage);
+      this.validations.add(validation);
+      return new PhraseSequenceBuilder(this.validations, this.field, this.errorMessages, this.validates, this.onSuccess, this.onError);
     }
   }
 
   public static class PhraseSequenceBuilder {
 
-    private List<Validate> validations;
-    private View field;
+    private List<Validation> validations;
+    private List<View> field;
+    private List<String> errorMessages;
+    private List<Validate> validates;
     private Action onSuccess;
     private Action onError;
 
-    public PhraseSequenceBuilder(List<Validate> validations, View field, Action onSuccess, Action onError) {
+    public PhraseSequenceBuilder(List<Validation> validations, List<View> field, List<String> errorMessages, List<Validate> validates, Action onSuccess, Action onError) {
       this.validations = validations;
       this.field = field;
+      this.errorMessages = errorMessages;
+      this.validates = validates;
       this.onSuccess = onSuccess;
       this.onError = onError;
     }
 
     public PhraseSequenceBuilder and(Validation validation) {
-      validation.field = this.field;
-      this.validations.add(validation.validate());
+      this.errorMessages.add(null);
+      this.validations.add(validation);
       return this;
     }
 
     public PhraseSequenceBuilder and(String errorMessage, Validation validation) {
-      validation.field = this.field;
-      validation.errorMessage = errorMessage;
-      this.validations.add(validation.validate());
+      this.errorMessages.add(errorMessage);
+      this.validations.add(validation);
       return this;
     }
 
     public PhraseSequenceBuilder and(Validate validate) {
-      this.validations.add(validate);
+      this.validates.add(validate);
       return this;
     }
 
     public Builder andField(View field) {
-      return new Builder(this.validations, field, this.onSuccess, this.onError);
+      this.field.add(field);
+      return new Builder(this.validations, this.field, this.errorMessages, this.validates, this.onSuccess, this.onError);
     }
 
     public PhraseSequenceBuilder onSuccess(Action action) {
@@ -106,30 +116,51 @@ public class Blorm {
       submittedItem.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          new Blorm(validations, onSuccess, onError).onSubmitted();
+          new Blorm(validations, field, errorMessages, validates, onSuccess, onError).onSubmitted();
         }
       });
     }
   }
 
-  private List<Validate> validations;
+  private List<Validation> validations;
+  private List<View> fields;
+  private List<String> errorMessages;
+  private List<Validate> validates;
   private Action onSuccess;
   private Action onError;
   private Boolean allValidationsPassed = true;
   
-  public Blorm(List<Validate> validations, Action onSuccess, Action onError) {
+  public Blorm(List<Validation> validations, List<View> fields, List<String> errorMessages, List<Validate> validates, Action onSuccess, Action onError) {
     this.validations = validations;
+    this.fields = fields;
+    this.errorMessages = errorMessages;
+    this.validates = validates;
     this.onSuccess = onSuccess;
     this.onError = onError;
   }
 
   private void onSubmitted() {
-    for(Validate validate : validations) {
-      if(validate.validate()) {
-        validate.onSuccess();
+    if(validates != null) {
+      for(int i = 0; i < validates.size(); i++) {
+        if(validates.get(i).validate()) {
+          validates.get(i).onSuccess();
+        } else {
+          validates.get(i).onError();
+        }
+      }
+    }
+
+    for(int i = 0; i < fields.size(); i ++) {
+      Validation currentValidation = validations.get(i);
+      View currentField = fields.get(i);
+      String currentErrorMessage = errorMessages.get(i);
+      currentValidation.errorMessage = currentErrorMessage != null ? currentErrorMessage : null;
+      currentValidation.field = currentField;
+      if(currentValidation.validate().validate()) {
+        currentValidation.validate().onSuccess();
       } else {
         allValidationsPassed = false;
-        validate.onError();
+        currentValidation.validate().onError();
       }
     }
     if(allValidationsPassed && onSuccess != null) {
