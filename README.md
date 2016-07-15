@@ -38,7 +38,7 @@ new Blorm.Builder().field(editText).is(filled).and(cpf)
 
 You can also make your own validations.
 ```java
-new Blorm.Builder().is(new Validate() {
+new Blorm.Builder().validate(new Validate() {
   @Override
   public boolean validate() {
     return false;
@@ -56,7 +56,7 @@ new Blorm.Builder().field(editTextFilled).is("Your Error Message", filled).submi
 Or you can also make your error case custom.
 
 ```java
-new Blorm.Builder().is(new Validate() {
+new Blorm.Builder().validate(new Validate() {
       @Override
       public boolean validate() {
         return false;
@@ -130,7 +130,7 @@ In this example, if one of these validations failed, it will appears that error 
 
 ```groovy
 dependencies {
-    compile 'com.github.bloder:blormlib:2.0'
+    compile 'com.github.bloder:blormlib:1.1'
 }
 ```
 
@@ -139,14 +139,14 @@ dependencies {
 <dependency>
   <groupId>com.github.bloder</groupId>
   <artifactId>blormlib</artifactId>
-  <version>2.0</version>
+  <version>1.1</version>
   <type>pom</type>
 </dependency>
 ```
 ##Ivy
 
 ```xml
-<dependency org='com.github.bloder' name='blormlib' rev='2.0'>
+<dependency org='com.github.bloder' name='blormlib' rev='1.1'>
   <artifact name='$AID' ext='pom'></artifact>
 </dependency>
 ```
