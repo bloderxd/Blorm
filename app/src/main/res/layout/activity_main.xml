@@ -10,8 +10,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <EditText
+        android:id="@+id/edit_text_filled_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/edit_text_filled_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <CheckBox
         android:id="@+id/check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+    <CheckBox
+        android:id="@+id/check_box2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"/>
