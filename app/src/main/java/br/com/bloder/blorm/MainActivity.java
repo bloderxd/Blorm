@@ -12,6 +12,7 @@ import br.com.bloder.blormlib.validation.Action;
 import br.com.bloder.blormlib.validation.Validate;
 
 import static br.com.bloder.blormlib.validation.Validations.checked;
+import static br.com.bloder.blormlib.validation.Validations.email;
 import static br.com.bloder.blormlib.validation.Validations.filled;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,23 +37,8 @@ public class MainActivity extends AppCompatActivity {
     submit = (Button) findViewById(R.id.submit);
 
       new Blorm.Builder()
-              .validate(new Validate() {
-        @Override
-        public boolean validate() {
-          return editTextFilled != null && !editTextFilled.getText().toString().isEmpty();
-        }
-
-        @Override
-        public void onError() {
-          editTextFilled.setError("RONALDO");
-        }
-
-        @Override
-        public void onSuccess() {
-          editTextFilled.setError(null);
-        }
-      })
-              .field(editTextFilled2).is("test2", filled)
+              .field(editTextFilled).is(email)
+              .andField(editTextFilled2).is("test2", filled)
               .andField(editTextFilled3).is(filled)
               .andField(checkBox).is(checked)
               .andField(checkBox2).is("test3", checked)
