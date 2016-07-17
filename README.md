@@ -30,7 +30,7 @@ Or like this:
 ```java
 import static br.com.bloder.blormlib.validation.Validations.*;
  
-new Blorm.Builder().field(editText).is(filled).and(cpf)
+new Blorm.Builder().field(editText).is(filled).and(email)
                    .andField(checkBox).is(checked)
                    .submitOn(button);
 ```
@@ -80,7 +80,7 @@ You can also define what program will do if all validations has passed:
 
 ```java
  new Blorm.Builder().field(editTextFilled).is(filled)
-                    .andField(editTextFilled).is(cpf)
+                    .andField(editTextFilled).is(email)
                     .onSuccess(new Action() {
                              @Override
                              public void call() {
@@ -130,7 +130,7 @@ In this example, if one of these validations failed, it will appears that error 
 
 ```groovy
 dependencies {
-    compile 'com.github.bloder:blormlib:1.1'
+    compile 'com.github.bloder:blormlib:2.1'
 }
 ```
 
@@ -139,14 +139,14 @@ dependencies {
 <dependency>
   <groupId>com.github.bloder</groupId>
   <artifactId>blormlib</artifactId>
-  <version>1.1</version>
+  <version>2.1</version>
   <type>pom</type>
 </dependency>
 ```
 ##Ivy
 
 ```xml
-<dependency org='com.github.bloder' name='blormlib' rev='1.1'>
+<dependency org='com.github.bloder' name='blormlib' rev='2.1'>
   <artifact name='$AID' ext='pom'></artifact>
 </dependency>
 ```
