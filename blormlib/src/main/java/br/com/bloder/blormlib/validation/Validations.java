@@ -2,6 +2,7 @@ package br.com.bloder.blormlib.validation;
 
 
 import br.com.bloder.blormlib.validation.validations.Checked;
+import br.com.bloder.blormlib.validation.validations.Email;
 import br.com.bloder.blormlib.validation.validations.Filled;
 
 /**
@@ -11,4 +12,5 @@ public class Validations {
 
   public static Validation filled = new Filled();
   public static Validation checked = new Checked();
+  public static Validation email = new Email();
 }
