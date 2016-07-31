@@ -14,5 +14,5 @@ public class Validations {
   public static Validation filled = new Filled();
   public static Validation checked = new Checked();
   public static Validation email = new Email();
-  public static Validation number = new Number();
+  public static Number number = new Number();
 }
