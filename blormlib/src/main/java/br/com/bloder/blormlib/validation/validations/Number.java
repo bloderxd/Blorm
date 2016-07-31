@@ -25,7 +25,7 @@ public class Number extends Validation {
 
       @Override
       public void onError() {
-        editText.setError("This field only accept numbers!");
+        editText.setError(errorMessage != null || !errorMessage.isEmpty() ? errorMessage : "This field only accept numbers!");
       }
 
       @Override
