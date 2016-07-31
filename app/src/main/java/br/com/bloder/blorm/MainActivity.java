@@ -14,6 +14,7 @@ import br.com.bloder.blormlib.validation.Validate;
 import static br.com.bloder.blormlib.validation.Validations.checked;
 import static br.com.bloder.blormlib.validation.Validations.email;
 import static br.com.bloder.blormlib.validation.Validations.filled;
+import static br.com.bloder.blormlib.validation.Validations.number;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
       new Blorm.Builder()
               .field(editTextFilled).is(email)
-              .andField(editTextFilled2).is("test2", filled)
+              .andField(editTextFilled2).is(number)
               .andField(editTextFilled3).is(filled)
               .andField(checkBox).is(checked)
               .andField(checkBox2).is("test3", checked)
