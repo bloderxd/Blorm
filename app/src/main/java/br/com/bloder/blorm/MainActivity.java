@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
       new Blorm.Builder()
               .field(editTextFilled).is(email)
-              .andField(editTextFilled2).is(number)
+              .andField(editTextFilled2).is(number.withMaxSize(3))
               .andField(editTextFilled3).is(filled)
               .andField(checkBox).is(checked)
               .andField(checkBox2).is("test3", checked)
