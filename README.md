@@ -130,7 +130,7 @@ In this example, if one of these validations failed, it will appears that error 
 
 ```groovy
 dependencies {
-    compile 'com.github.bloder:blormlib:2.1'
+    compile 'com.github.bloder:blormlib:2.2'
 }
 ```
 
@@ -139,14 +139,14 @@ dependencies {
 <dependency>
   <groupId>com.github.bloder</groupId>
   <artifactId>blormlib</artifactId>
-  <version>2.1</version>
+  <version>2.2</version>
   <type>pom</type>
 </dependency>
 ```
 ##Ivy
 
 ```xml
-<dependency org='com.github.bloder' name='blormlib' rev='2.1'>
+<dependency org='com.github.bloder' name='blormlib' rev='2.2'>
   <artifact name='$AID' ext='pom'></artifact>
 </dependency>
 ```
