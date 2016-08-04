@@ -19,7 +19,7 @@ public class Filled extends Validation {
     return this;
   }
  
-  public Filed withMinimumSize(int minSize) {
+  public Filled withMinimumSize(int minSize) {
     this.minSize = minSize;
     return this;
   }
