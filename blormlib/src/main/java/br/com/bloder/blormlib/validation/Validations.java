@@ -11,7 +11,7 @@ import br.com.bloder.blormlib.validation.validations.Number;
  */
 public class Validations {
 
-  public static Validation filled = new Filled();
+  public static Filled filled = new Filled();
   public static Validation checked = new Checked();
   public static Validation email = new Email();
   public static Number number = new Number();
