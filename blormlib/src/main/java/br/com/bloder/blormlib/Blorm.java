@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.bloder.blormlib.validation.Action;
-import br.com.bloder.blormlib.validation.Validate;
-import br.com.bloder.blormlib.validation.Validation;
+import br.com.bloder.blormlib.validation.ValidateKotlin;
+import br.com.bloder.blormlib.validation.ValidationKotlin;
 
 /**
  * Created by bloder on 05/06/16.
@@ -16,10 +16,10 @@ public class Blorm {
 
   public static class Builder {
 
-    private List<Validation> validations;
+    private List<ValidationKotlin> validations;
     private List<View> field;
     private List<String> errorMessages;
-    private List<Validate> validates;
+    private List<ValidateKotlin> validates;
     private Action onSuccess;
     private Action onError;
 
@@ -30,7 +30,7 @@ public class Blorm {
       this.field = new ArrayList<>();
     }
 
-    public Builder(List<Validation> validations, List<View> field, List<String> errorMessages, List<Validate> validates, Action onSuccess, Action onError) {
+    public Builder(List<ValidationKotlin> validations, List<View> field, List<String> errorMessages, List<ValidateKotlin> validates, Action onSuccess, Action onError) {
       this.validations = validations;
       this.field = field;
       this.errorMessages = errorMessages;
@@ -44,18 +44,18 @@ public class Blorm {
       return this;
     }
 
-    public Builder validate(Validate validation) {
+    public Builder validate(ValidateKotlin validation) {
       this.validates.add(validation);
       return this;
     }
 
-    public PhraseSequenceBuilder is(Validation validation) {
+    public PhraseSequenceBuilder is(ValidationKotlin validation) {
       this.errorMessages.add(null);
       this.validations.add(validation);
       return new PhraseSequenceBuilder(this.validations, this.field, this.errorMessages, this.validates, this.onSuccess, this.onError);
     }
 
-    public PhraseSequenceBuilder is(String errorMessage, Validation validation) {
+    public PhraseSequenceBuilder is(String errorMessage, ValidationKotlin validation) {
       this.errorMessages.add(errorMessage);
       this.validations.add(validation);
       return new PhraseSequenceBuilder(this.validations, this.field, this.errorMessages, this.validates, this.onSuccess, this.onError);
@@ -64,14 +64,14 @@ public class Blorm {
 
   public static class PhraseSequenceBuilder {
 
-    private List<Validation> validations;
+    private List<ValidationKotlin> validations;
     private List<View> field;
     private List<String> errorMessages;
-    private List<Validate> validates;
+    private List<ValidateKotlin> validates;
     private Action onSuccess;
     private Action onError;
 
-    public PhraseSequenceBuilder(List<Validation> validations, List<View> field, List<String> errorMessages, List<Validate> validates, Action onSuccess, Action onError) {
+    public PhraseSequenceBuilder(List<ValidationKotlin> validations, List<View> field, List<String> errorMessages, List<ValidateKotlin> validates, Action onSuccess, Action onError) {
       this.validations = validations;
       this.field = field;
       this.errorMessages = errorMessages;
@@ -80,19 +80,19 @@ public class Blorm {
       this.onError = onError;
     }
 
-    public PhraseSequenceBuilder and(Validation validation) {
+    public PhraseSequenceBuilder and(ValidationKotlin validation) {
       this.errorMessages.add(null);
       this.validations.add(validation);
       return this;
     }
 
-    public PhraseSequenceBuilder and(String errorMessage, Validation validation) {
+    public PhraseSequenceBuilder and(String errorMessage, ValidationKotlin validation) {
       this.errorMessages.add(errorMessage);
       this.validations.add(validation);
       return this;
     }
 
-    public PhraseSequenceBuilder validate(Validate validate) {
+    public PhraseSequenceBuilder validate(ValidateKotlin validate) {
       this.validates.add(validate);
       return this;
     }
@@ -122,15 +122,15 @@ public class Blorm {
     }
   }
 
-  private List<Validation> validations;
+  private List<ValidationKotlin> validations;
   private List<View> fields;
   private List<String> errorMessages;
-  private List<Validate> validates;
+  private List<ValidateKotlin> validates;
   private Action onSuccess;
   private Action onError;
   private Boolean allValidationsPassed = true;
   
-  public Blorm(List<Validation> validations, List<View> fields, List<String> errorMessages, List<Validate> validates, Action onSuccess, Action onError) {
+  public Blorm(List<ValidationKotlin> validations, List<View> fields, List<String> errorMessages, List<ValidateKotlin> validates, Action onSuccess, Action onError) {
     this.validations = validations;
     this.fields = fields;
     this.errorMessages = errorMessages;
@@ -142,7 +142,7 @@ public class Blorm {
   private void onSubmitted() {
     if(validates != null) {
       for(int i = 0; i < validates.size(); i++) {
-        if(validates.get(i).validate()) {
+        if(validates.get(i).validateIt()) {
           validates.get(i).onSuccess();
         } else {
           validates.get(i).onError();
@@ -151,12 +151,12 @@ public class Blorm {
     }
 
     for(int i = 0; i < fields.size(); i ++) {
-      Validation currentValidation = validations.get(i);
+      ValidationKotlin currentValidation = validations.get(i);
       View currentField = fields.get(i);
       String currentErrorMessage = errorMessages.get(i);
-      currentValidation.errorMessage = currentErrorMessage != null ? currentErrorMessage : null;
-      currentValidation.field = currentField;
-      if(currentValidation.validate().validate()) {
+      currentValidation.setErrorMessage(currentErrorMessage != null ? currentErrorMessage : null);
+      currentValidation.setField(currentField);
+      if(currentValidation.validate().validateIt()) {
         currentValidation.validate().onSuccess();
       } else {
         allValidationsPassed = false;
