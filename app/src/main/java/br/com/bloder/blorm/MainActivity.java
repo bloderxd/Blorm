@@ -9,12 +9,8 @@ import android.widget.Toast;
 
 import br.com.bloder.blormlib.Blorm;
 import br.com.bloder.blormlib.validation.Action;
-import br.com.bloder.blormlib.validation.Validate;
 
-import static br.com.bloder.blormlib.validation.Validations.checked;
-import static br.com.bloder.blormlib.validation.Validations.email;
-import static br.com.bloder.blormlib.validation.Validations.filled;
-import static br.com.bloder.blormlib.validation.Validations.number;
+import static br.com.bloder.blormlib.validation.Validations.*;
 
 public class MainActivity extends AppCompatActivity {
 
