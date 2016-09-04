@@ -60,6 +60,10 @@ public class Blorm {
       this.validations.add(validation);
       return new PhraseSequenceBuilder(this.validations, this.field, this.errorMessages, this.validates, this.onSuccess, this.onError);
     }
+
+    public Blorm validateItManually() {
+      return new Blorm(validations, field, errorMessages, validates, onSuccess, onError);
+    }
   }
 
   public static class PhraseSequenceBuilder {
@@ -128,6 +132,10 @@ public class Blorm {
           if (!hasFocus) new Blorm(validations, field, errorMessages, validates, onSuccess, onError).onSubmitted();
         }
       });
+    }
+
+    public Blorm validateItManually() {
+      return new Blorm(validations, field, errorMessages, validates, onSuccess, onError);
     }
   }
 
