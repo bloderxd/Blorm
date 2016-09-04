@@ -33,25 +33,27 @@ public class MainActivity extends AppCompatActivity {
     checkBox2 = (CheckBox) findViewById(R.id.check_box2);
     submit = (Button) findViewById(R.id.submit);
 
-      new Blorm.Builder()
-              .field(editTextFilled).is(email)
-              .andField(editTextFilled2).is(number.withMaxSize(3))
-              .andField(editTextFilled3).is(filled)
-              .andField(checkBox).is(checked)
-              .andField(checkBox2).is("test3", checked)
-              .onSuccess(new Action() {
+    new Blorm.Builder().field(editTextFilled).is(email).whenChangeFocusOn(editTextFilled);
+
+    new Blorm.Builder()
+            .field(editTextFilled).is(email)
+            .andField(editTextFilled2).is(number.withMaxSize(3))
+            .andField(editTextFilled3).is(filled)
+            .andField(checkBox).is(checked)
+            .andField(checkBox2).is("test3", checked)
+            .onSuccess(new Action() {
                   @Override
                   public void call() {
                       onSuccess();
                   }
               })
-              .onError(new Action() {
+            .onError(new Action() {
                 @Override
                 public void call() {
                   onError();
                 }
               })
-              .submitOn(submit);
+            .onSubmit(submit);
   }
 
   private void onSuccess() {
