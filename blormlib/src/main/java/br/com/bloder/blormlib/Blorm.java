@@ -112,11 +112,20 @@ public class Blorm {
       return this;
     }
 
-    public void submitOn(View submittedItem) {
+    public void onSubmit(View submittedItem) {
       submittedItem.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
           new Blorm(validations, field, errorMessages, validates, onSuccess, onError).onSubmitted();
+        }
+      });
+    }
+
+    public void whenChangeFocusOn(View submittedItem) {
+      submittedItem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+          if (!hasFocus) new Blorm(validations, field, errorMessages, validates, onSuccess, onError).onSubmitted();
         }
       });
     }
