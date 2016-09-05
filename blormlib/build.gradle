@@ -37,7 +37,7 @@ install {
 
                 name 'Blorm'
                 description = 'Android field validation lib'
-                url 'https://github.com/bloder/Blorm'
+                url 'https://github.com/daniel-martins-IR/Blorm'
 
                 licenses {
                     license {
@@ -53,9 +53,9 @@ install {
                     }
                 }
                 scm {
-                    connection 'https://github.com/bloder/Blorm.git'
-                    developerConnection 'https://github.com/bloder/Blorm.git'
-                    url 'https://github.com/bloder/Blorm'
+                    connection 'https://github.com/daniel-martins-IR/Blorm.git'
+                    developerConnection 'https://github.com/daniel-martins-IR/Blorm.git'
+                    url 'https://github.com/daniel-martins-IR/Blorm'
                 }
             }
         }
@@ -92,8 +92,8 @@ bintray {
         repo = 'maven'
         name = 'Blorm'
         licenses = ['Apache-2.0']
-        websiteUrl = 'https://github.com/bloder/Blorm'
-        vcsUrl = 'https://github.com/bloder/Blorm.git'
+        websiteUrl = 'https://github.com/daniel-martins-IR/Blorm'
+        vcsUrl = 'https://github.com/daniel-martins-IR/Blorm.git'
         publish = true
         version {
             gpg {
